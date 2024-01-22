@@ -1,0 +1,60 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: bisque;
+    height: 95vh;
+    gap: 24px;
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    width: 300px;
+    height: 430px;
+    border-radius: 5px;
+    border: solid 2px;
+    background-color:slategrey;
+    justify-content: space-between;
+}
+
+.visor {
+    background-color: rgb(69, 105, 102);
+    height: 70px;
+    border: solid 2px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.buttoncontainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    width: 600px;
+    gap: 15px;
+}
+
+button {
+    width: 61px;
+    height: 58px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: large;
+}
+
+#equals {
+    width: 137px;
+    border-radius: 5px;
+}
+
+footer {
+    font-size: 20px;
+}
