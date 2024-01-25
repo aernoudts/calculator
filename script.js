@@ -19,12 +19,12 @@ let secondNumber = '';
 
 numberButtons.forEach(number => {
     number.addEventListener('click', function() {
-        if (visorNumbers.textContent === "0") {
+        if (visorNumbers.textContent === '0') {
             visorNumbers.textContent = '';
         }
         if (visorNumbers.textContent.length <= 10) {
             visorNumbers.textContent+= number.textContent;
-            if (operator === "") { 
+            if (operator === '') { 
                 firstNumber += number.textContent;
                 console.log(firstNumber)
             } else { 
@@ -43,12 +43,7 @@ operatorButtons.forEach(button => {
             console.log(operator);
         }
         if (firstNumber && operator && secondNumber) {
-            let result = calculate(firstNumber, operator, secondNumber);
-            visorNumbers.textContent = result;
-            console.log(result);
-            firstNumber = result;
-            secondNumber = '';
-            operator = '';
+            calculate(firstNumber, operator, secondNumber)
         }
     });
 });
@@ -65,25 +60,38 @@ decimal.addEventListener('click', function() {
 });
 
 equals.addEventListener('click', function() {
-    let result = calculate(firstNumber, operator, secondNumber);
-    visorNumbers.textContent = result;
-    console.log(result);
-    firstNumber = result;
+    if (firstNumber && operator && secondNumber) {
+        let result = calculate(firstNumber, operator, secondNumber);
+        visorNumbers.textContent = result;
+        console.log(result);
+        firstNumber = result;
+        secondNumber = '';
+        operator = '';
+    }
+});
+
+clear.addEventListener('click', function() {
+    visorNumbers.textContent = '0';
+    firstNumber = '';
     secondNumber = '';
     operator = '';
 });
 
-let calculate = function(firstNumber, operator, secondNumber) {
+function calculate(firstNumber, operator, secondNumber) {
     switch (operator) {
-        case '-': return parseFloat(firstNumber) - parseFloat(secondNumber);
-        case '+': return parseFloat(firstNumber) + parseFloat(secondNumber);
-        case 'x': return parseFloat(firstNumber) * parseFloat(secondNumber);
-        case '%': return parseFloat(firstNumber) % parseFloat(secondNumber);
+        case '-': return round(parseFloat(firstNumber) - parseFloat(secondNumber), 4);
+        case '+': return round(parseFloat(firstNumber) + parseFloat(secondNumber), 4);
+        case 'x': return round(parseFloat(firstNumber) * parseFloat(secondNumber), 4);
+        case '%': return round(parseFloat(firstNumber) % parseFloat(secondNumber), 4);
         case '÷':
-            if (secondNumber != 0) {
-                parseInt(firstNumber) / parseInt(secondNumber);
+            if (secondNumber != '0') {
+                return parseInt(firstNumber) / parseInt(secondNumber);
             }else {
                 return "Error"
         }
     }
+}
+
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
