@@ -15,35 +15,40 @@ let firstNumber = '';
 let operator = '';
 let secondNumber = '';
 
-//arara saudita
-
+/*By pressing calculator numbers, the first number of the operation is generated if the operator has not been set yet.
+Generates second number otherwise.*/
 numberButtons.forEach(number => {
     number.addEventListener('click', function() {
         if (visorNumbers.textContent === '0') {
             visorNumbers.textContent = '';
         }
         if (visorNumbers.textContent.length <= 10) {
-            visorNumbers.textContent+= number.textContent;
             if (operator === '') { 
                 firstNumber += number.textContent;
+                visorNumbers.textContent = firstNumber;
                 console.log(firstNumber)
-            } else { 
+            } else {
                 secondNumber += number.textContent;
-                console.log(secondNumber)
+                visorNumbers.textContent = secondNumber;
+                //console.log(secondNumber)
             }
         }
     });
 });    
 
+//Will keep calculating if operators keep getting selected after initial selection.
 operatorButtons.forEach(button => {
     button.addEventListener('click', function() {
         if (firstNumber) {
             operator = button.textContent;
-            visorNumbers.textContent = '';
-            console.log(operator);
+            //console.log(operator);
         }
         if (firstNumber && operator && secondNumber) {
-            calculate(firstNumber, operator, secondNumber)
+            let result = calculate(firstNumber, operator, secondNumber);
+            visorNumbers.textContent = result;
+            //console.log(result);
+            firstNumber = result;
+            secondNumber = '';
         }
     });
 });
@@ -63,7 +68,7 @@ equals.addEventListener('click', function() {
     if (firstNumber && operator && secondNumber) {
         let result = calculate(firstNumber, operator, secondNumber);
         visorNumbers.textContent = result;
-        console.log(result);
+        //console.log(result);
         firstNumber = result;
         secondNumber = '';
         operator = '';
@@ -83,15 +88,10 @@ function calculate(firstNumber, operator, secondNumber) {
         case '+': return round(parseFloat(firstNumber) + parseFloat(secondNumber), 4);
         case 'x': return round(parseFloat(firstNumber) * parseFloat(secondNumber), 4);
         case '%': return round(parseFloat(firstNumber) % parseFloat(secondNumber), 4);
-        case '÷':
-            if (secondNumber != '0') {
-                return parseInt(firstNumber) / parseInt(secondNumber);
-            }else {
-                return "Error"
-        }
+        case '÷': return (secondNumber != '0' ? round(parseFloat(firstNumber) / parseFloat(secondNumber), 4) : "Error");
     }
 }
 
 function round(value, decimals) {
-    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
 }
