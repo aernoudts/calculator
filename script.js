@@ -21,7 +21,7 @@ numberButtons.forEach(number => {
         if (visorNumbers.textContent === '0') {
             visorNumbers.textContent = '';
         }
-        if (visorNumbers.textContent.length < 13) {
+        if (visorNumbers.textContent.length < 14) {
             if (operator === '') { 
                 firstNumber += number.textContent;
                 visorNumbers.textContent = firstNumber;
