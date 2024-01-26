@@ -1,6 +1,5 @@
 let decimal = document.querySelector("#decimal")
 let clear = document.querySelector("#clear");
-let invert = document.querySelector("#invert");
 let remainder = document.querySelector("#remainder");
 let add = document.querySelector("#add");
 let subtract = document.querySelector("#subtract");
@@ -22,11 +21,11 @@ numberButtons.forEach(number => {
         if (visorNumbers.textContent === '0') {
             visorNumbers.textContent = '';
         }
-        if (visorNumbers.textContent.length <= 10) {
+        if (visorNumbers.textContent.length < 13) {
             if (operator === '') { 
                 firstNumber += number.textContent;
                 visorNumbers.textContent = firstNumber;
-                console.log(firstNumber)
+                //console.log(firstNumber)
             } else {
                 secondNumber += number.textContent;
                 visorNumbers.textContent = secondNumber;
@@ -71,7 +70,6 @@ equals.addEventListener('click', function() {
         //console.log(result);
         firstNumber = result;
         secondNumber = '';
-        operator = '';
     }
 });
 
