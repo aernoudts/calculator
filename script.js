@@ -8,6 +8,7 @@ const operatorButtons = document.querySelectorAll(".operator")
 let firstNumber = '';
 let operator = '';
 let secondNumber = '';
+const decimalsNumber = 4;
 
 /*By pressing calculator numbers, the first number of the operation is generated if the operator has not been set yet.
 Generates second number otherwise.*/
@@ -38,7 +39,7 @@ operatorButtons.forEach(button => {
             //console.log(operator);
         }
         if (firstNumber && operator && secondNumber) {
-            let result = calculate(firstNumber, operator, secondNumber);
+            let result = calculate(firstNumber, operator, secondNumber, decimalsNumber);
             visorNumbers.textContent = result;
             //console.log(result);
             firstNumber = result;
@@ -60,7 +61,7 @@ decimal.addEventListener('click', function() {
 
 equals.addEventListener('click', function() {
     if (firstNumber && operator && secondNumber) {
-        let result = calculate(firstNumber, operator, secondNumber);
+        let result = calculate(firstNumber, operator, secondNumber, decimalsNumber);
         visorNumbers.textContent = result;
         //console.log(result);
         firstNumber = result;
@@ -75,13 +76,13 @@ clear.addEventListener('click', function() {
     operator = '';
 });
 
-function calculate(firstNumber, operator, secondNumber) {
+function calculate(firstNumber, operator, secondNumber, decimalsNumber) {
     switch (operator) {
-        case '-': return round(parseFloat(firstNumber) - parseFloat(secondNumber), 4);
-        case '+': return round(parseFloat(firstNumber) + parseFloat(secondNumber), 4);
-        case 'x': return round(parseFloat(firstNumber) * parseFloat(secondNumber), 4);
-        case '%': return round(parseFloat(firstNumber) % parseFloat(secondNumber), 4);
-        case '÷': return (secondNumber != '0' ? round(parseFloat(firstNumber) / parseFloat(secondNumber), 4) : "Error");
+        case '-': return round(parseFloat(firstNumber) - parseFloat(secondNumber), decimalsNumber);
+        case '+': return round(parseFloat(firstNumber) + parseFloat(secondNumber), decimalsNumber);
+        case '×': return round(parseFloat(firstNumber) * parseFloat(secondNumber), decimalsNumber);
+        case '%': return round(parseFloat(firstNumber) % parseFloat(secondNumber), decimalsNumber);
+        case '÷': return (secondNumber != '0' ? round(parseFloat(firstNumber) / parseFloat(secondNumber), decimalsNumber) : "Error");
     }
 }
 
